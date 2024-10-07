@@ -350,7 +350,7 @@ const verityAdmin = async(req, res, next) => {
         res.send(result);
     })
 
-    app.get('/user-stats', async (req, res) =>{
+    app.get('/user-stats', verifyToken, async (req, res) =>{
         const email = req.query.email;
         const menuItems = await menuCollection.estimatedDocumentCount();
         const pipeline = [
