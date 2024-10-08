@@ -10,7 +10,9 @@ const port = process.env.PORT || 5000;
 
 //middleware
 
-app.use(cors());
+app.use(cors({
+origin: ['http://localhost:5000', "https://bistro-boss-cd821.web.app", "https://bistro-boss-cd821.firebaseapp.com"]
+}));
 // app.use(express.static("public"));
 app.use(express.json());
 
@@ -39,7 +41,7 @@ const client = new MongoClient(uri, {
  async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect();
+    // await client.connect();
 
     const menuCollection = client.db("bistroDB").collection("menu")
     const userCollection = client.db("bistroDB").collection("users")
@@ -382,8 +384,8 @@ const verityAdmin = async(req, res, next) => {
         });
     })
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    // await client.db("admin").command({ ping: 1 });
+    // console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
